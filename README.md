@@ -1,224 +1,279 @@
 # COLOR_CONVERSIONS_OF-IMAGE
 ## AIM
-To write a python program using OpenCV to do the following image manipulations.
+Write a Python program using OpenCV that performs the following tasks:
 
-i) Read, display, and write an image.
+i) Read and Display an Image.
 
-ii) Access the rows and columns in an image.
+ii) Draw Shapes and Add Text.
 
-iii) Cut and paste a small portion of the image.
+iii) Image Color Conversion.
 
-iv)To perform the color conversion between RGB, BGR, HSV, and YCbCr color models.
+iv) Access and Manipulate Image Pixels.
+
+v) Image Resizing
+
+vi) Image Cropping
+
+vii) Image Flipping
+
+viii)	Write and Save the Modified Image
 
 
 ## Software Required:
 Anaconda - Python 3.7
+
 ## Algorithm:
 ### Step1:
-Choose an image and save it as a filename.jpg ,
+Load an image from your local directory and display it.
 ### Step2:
-Use imread(filename, flags) to read the file.
+1.  Draw a line from the top-left to the bottom-right of the image.
+
+2.	Draw a circle at the center of the image.
+
+3.	Draw a rectangle around a specific region of interest in the image.
+
+4.	Add the text "OpenCV Drawing" at the top-left corner of the image.
+
 ### Step3:
-Use imshow(window_name, image) to display the image.
+1.	Convert the image from RGB to HSV and display it.
+2.	Convert the image from RGB to GRAY and display it.
+3.	Convert the image from RGB to YCrCb and display it.
+4.	Convert the HSV image back to RGB and display it.
+
 ### Step4:
-Use imwrite(filename, image) to write the image.
+1.	Access and print the value of the pixel at coordinates (100, 100).
+2.	Modify the color of the pixel at (200, 200) to white.
+
 ### Step5:
-End the program and close the output image windows.
+Resize the original image to half its size and display it.
 ### Step6:
-Convert BGR and RGB to HSV and GRAY
+Crop a region of interest (ROI) from the image (e.g., a 100x100 pixel area starting at (50, 50)) and display it.
 ### Step7:
-Convert HSV to RGB and BGR
+1.	Flip the original image horizontally and display it.
+2.	Flip the original image vertically and display it.
+
 ### Step8:
-Convert RGB and BGR to YCrCb
-### Step9:
-Split and Merge RGB Image
-### Step10:
-Split and merge HSV Image
+Save the final modified image to your local directory.
 
 ## Program:
 ### Developed By: Dharini PV
 ### Register Number: 212222240024
 
-### i) Read and display the image
+## Output:
+
+### 1. Read and display the image
+i.Load an image from your local directory and display it.
 ```python
 import cv2
-image=cv2.imread('re.jpg',1)
-image=cv2.resize(image,(400,300))
-cv2.imshow('DhariniPV_212222240024.jpg',image)
+image=cv2.imread('scenery.jpg',1)
+image = cv2.resize(image, (400, 300))
+cv2.imshow('DhariniPV_212222240024',image)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 ```
-### Output:
+![image](https://github.com/user-attachments/assets/75f70659-2624-4bb9-80cb-5cd76957d2fa)
 
-![Screenshot 2024-08-23 192326](https://github.com/user-attachments/assets/7248fadc-b5f9-4841-bfa5-e24fdd88a265)
-
-### ii)Write the image
+### Draw Shapes and Add Text
+(1) Draw a line from the top-left to the bottom-right of the image.
 ```python
 import cv2
-image=cv2.imread('re.jpg',0)
-cv2.imwrite('img.jpg',image)
-```
-### Output:
-
-![Screenshot 2024-08-23 192414](https://github.com/user-attachments/assets/a9ba47e2-58aa-414f-b9b1-673693b40558)
-
-### iii)Shape of the Image
-```python
-import cv2
-image=cv2.imread('re.jpg',1)
-print(image.shape)
-```
-### Output:
-
-![Screenshot 2024-08-23 192505](https://github.com/user-attachments/assets/eacfcffd-f320-4d7a-8062-b32c54090a70)
-
-### iv)Access rows and columns
-```python
-import random
-import cv2
-image=cv2.imread('re.jpg',1)
-image=cv2.resize(image,(400,300))
-for i in range (150,200):
-    for j in range(image.shape[1]):
-        image[i][j]=[random.randint(0,255),
-                     random.randint(0,255),
-                     random.randint(0,255)] 
-cv2.imshow('part image',image)
+image = cv2.imread("scenery.jpg")
+image = cv2.resize(image, (400, 300))
+res = cv2.line(image, (0, 0), (image.shape[1], image.shape[0]), (255,0,0), 10)
+cv2.imshow('DhariniPV_212222240024', res)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 ```
-### Output:
-![Screenshot 2024-08-23 192743](https://github.com/user-attachments/assets/82b625de-3195-468b-a598-62a15a212abf)
+![image](https://github.com/user-attachments/assets/f87a2f72-6904-4825-af30-071de0d85773)
 
-### v)Cut and paste portion of image
+2. Draw a circle at the center of the image.
 ```python
 import cv2
-image=cv2.imread('re.jpg',1)
-image=cv2.resize(image,(500,400))
-tag =image[200:300,110:210]
-image[110:210,200:300] = tag
-cv2.imshow('partimage1',image)
+image = cv2.imread("scenery.jpg")
+image = cv2.resize(image, (400, 300))
+height, width, _ = image.shape
+center_coordinates = (width // 2, height // 2)
+res = cv2.circle(image, center_coordinates, 120, (0, 255, 0), 10)
+cv2.imshow('DhariniPV_212222240024', res)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 ```
-### Output:
+![image](https://github.com/user-attachments/assets/f70ab9fd-f586-4c03-9291-217a67e1b123)
 
-![Screenshot 2024-08-23 204927](https://github.com/user-attachments/assets/b336669d-72e3-44f3-9083-cf3e472ada57)
-
-### vi) BGR and RGB to HSV and GRAY
+3.Draw a rectangle around a specific region of interest in the image.
 ```python
 import cv2
-img = cv2.imread('re.jpg',1)
+image = cv2.imread("scenery.jpg")
+image = cv2.resize(image, (400, 300))
+start = (150, 100)
+stop = (300, 200)
+color = (255, 255, 100)
+thickness = 10           
+res_img = cv2.rectangle(image, start, stop, color, thickness)
+cv2.imshow('DhariniPV_212222240024', res_img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+![image](https://github.com/user-attachments/assets/97c153a7-9566-4709-b8c3-b425d4ff1f49)
+
+
+4.Add the text "OpenCV Drawing" at the top-left corner of the image.
+```python
+import cv2
+image = cv2.imread("scenery.jpg")
+image = cv2.resize(image, (400, 300))
+text = "OpenCV Drawing"
+position = (10, 50)
+font = cv2.FONT_HERSHEY_SIMPLEX
+font_scale = 1
+color = (255, 255, 255) 
+thickness = 2
+res = cv2.putText(image, text, position, font, font_scale, color, thickness, cv2.LINE_AA)
+cv2.imshow('DhariniPV_212222240024', res)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+![image](https://github.com/user-attachments/assets/bb39bc06-25ea-4fd7-b9f6-16fdbc70fa2c)
+
+### iii)Image Color Conversion
+(i)Convert the image from RGB to HSV and display it
+```python
+import cv2
+image = cv2.imread('scenery.jpg',1)
+image = cv2.resize(image,(300,200))
+cv2.imshow('ORIGINAL IMAGE',image)
+hsv = cv2.cvtColor(image,cv2.COLOR_RGB2HSV)
+cv2.imshow('RGB2HSV',hsv)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+![image](https://github.com/user-attachments/assets/6f4e5be7-e075-4cb5-b87e-2de7c4f6392d)
+
+(2) Convert the image from RGB to GRAY and display it.
+
+```python
+import cv2
+image = cv2.imread('scenery.jpg',1)
+image = cv2.resize(image,(300,200))
+cv2.imshow('ORIGINAL IMAGE',image)
+gray = cv2.cvtColor(image,cv2.COLOR_RGB2GRAY)
+cv2.imshow('RGB2GRAY',gray)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+![image](https://github.com/user-attachments/assets/94ba15a5-b663-4d72-b244-354c370d993d)
+
+
+(3) Convert the image from RGB to YCrCb and display it.
+```python
+import cv2
+image = cv2.imread('scenery.jpg',1)
+image = cv2.resize(image,(300,200))
+cv2.imshow('ORIGINAL IMAGE',image)
+YCrCb = cv2.cvtColor(image, cv2.COLOR_BGR2YCrCb)
+cv2.imshow('RGB-2-YCrCb',YCrCb)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+![image](https://github.com/user-attachments/assets/4248d46f-1aa8-4fde-99e4-fecec7034776)
+
+(4) Convert the HSV image back to RGB and display it.
+```python
+import cv2
+image = cv2.imread('scenery.jpg',1)
+image = cv2.resize(image,(300,200))
+cv2.imshow('ORIGINAL IMAGE',image)
+RGB = cv2.cvtColor(image,cv2.COLOR_HSV2BGR)
+cv2.imshow('HSV2RGB',RGB)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+![image](https://github.com/user-attachments/assets/a6d2a64b-f87f-4a60-a57f-06213126af60)
+
+### iv)Access and Manipulate Image Pixels
+(1) Access and print the value of the pixel at coordinates (100, 100)
+```python
+pixel_value = image[100, 100]
+print(f"Pixel value at (100, 100): {pixel_value}")
+```
+![image](https://github.com/user-attachments/assets/5c4eb1f2-e481-4829-9ce1-ecda06bc4df4)
+
+(2) Modify the color of the pixel at (200, 200) to white
+```python
+import cv2
+image = cv2.imread('scenery.jpg',1)
+image = cv2.resize(image,(400,300))
+cv2.imshow('ORIGINAL IMAGE',image)
+image[205:210, 205:210] = [255, 255, 255]
+cv2.imshow('MODIFIED IMAGE', image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+![image](https://github.com/user-attachments/assets/11a340c2-a55b-442b-85a2-400f3bfd4c67)
+
+### v)Image Resizing:
+Resize the original image to half its size and display it.
+```python
+cv2.imshow('ORIGINAL IMAGE',image)
+resized_image = cv2.resize(image, (image.shape[1] // 2, image.shape[0] // 2))
+cv2.imshow('RESIZED IMAGE', resized_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+![image](https://github.com/user-attachments/assets/2ea2e67e-575b-404f-8275-dbe56b323826)
+
+
+### vi)Image Cropping
+Crop a region of interest (ROI) from the image (e.g., a 100x100 pixel area starting at (50, 50)) and display it.
+```python
+import cv2
+image = cv2.imread('scenery.jpg',1)
+image = cv2.resize(image,(400,300))
+x, y = 50, 50
+width, height = 100, 100
+roi = image[y:y + height, x:x + width]
+cv2.imshow('CROPPED IMAGE', roi)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+![image](https://github.com/user-attachments/assets/42088f34-eab6-4f6a-9c49-60b4d72d369c)
+### vii)Image Flipping:
+(1) Flip the original image horizontally and display it.
+```python
+import cv2
+image = cv2.imread("scenery.jpg")
+image = cv2.resize(image,(300,200))
+res=cv2.flip(image,1)
+cv2.imshow('ORIGINAL IMAGE',image)
+cv2.imshow('FLIPPED IMAGE', res)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+![image](https://github.com/user-attachments/assets/299f4e37-e7b3-429d-8eed-38c2d3630bba)
+
+(2) Flip the original image vertically and display it.
+```python
+import cv2
+image = cv2.imread("scenery.jpg")
+image = cv2.resize(image,(300,200))
+res=cv2.flip(image,0)
+cv2.imshow('ORIGINAL IMAGE',image)
+cv2.imshow('FLIPPED IMAGE', res)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+![image](https://github.com/user-attachments/assets/1caa763e-d7ce-427c-92c6-ad1d493a2dfb)
+
+
+### viii)Write and Save the Modified Image
+Save the final modified image to your local directory.
+```python
+import cv2
+img = cv2.imread("scenery.jpg")
 img = cv2.resize(img,(300,200))
-cv2.imshow('Original Image',img)
-
-hsv1 = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
-cv2.imshow('BGR2HSV',hsv1)
-
-hsv2 = cv2.cvtColor(img,cv2.COLOR_RGB2HSV)
-cv2.imshow('RGB2HSV',hsv2)
-
-gray1 = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-cv2.imshow('BGR2GRAY',gray1)
-
-gray2 = cv2.cvtColor(img,cv2.COLOR_RGB2GRAY)
-cv2.imshow('RGB2GRAY',gray2)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+cv2.imwrite('Mountains.jpg',img)
 ```
-### Output:
-
-![Screenshot 2024-08-23 205800](https://github.com/user-attachments/assets/d1ea97d4-08e7-4231-906f-6ec24ce49afb)
-
-### vii) HSV to RGB and BGR
-```python
-import cv2
-img = cv2.imread('re.jpg')
-img = cv2.resize(img,(300,200))
-
-img = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
-cv2.imshow('Original HSV Image',img)
-
-RGB = cv2.cvtColor(img,cv2.COLOR_HSV2RGB)
-cv2.imshow('2HSV2BGR',RGB)
-
-BGR = cv2.cvtColor(img,cv2.COLOR_HSV2BGR)
-cv2.imshow('HSV2RGB',BGR)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-```
-### Output:
-
-![Screenshot 2024-08-23 210114](https://github.com/user-attachments/assets/524cc73a-7be6-469d-b66d-debe53eb4ca2)
-
-### viii) RGB and BGR to YCrCb
-```python
-import cv2
-img = cv2.imread('re.jpg')
-img = cv2.resize(img,(300,200))
-cv2.imshow('Original RGB Image',img)
-
-YCrCb1 = cv2.cvtColor(img, cv2.COLOR_BGR2YCrCb)
-cv2.imshow('RGB-2-YCrCb',YCrCb1)
-
-YCrCb2 = cv2.cvtColor(img, cv2.COLOR_RGB2YCrCb)
-cv2.imshow('BGR-2-YCrCb',YCrCb2)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-```
-### Output:
-
-![Screenshot 2024-08-23 210213](https://github.com/user-attachments/assets/00d64d81-8d23-4834-9f59-d8d31eeaeec7)
-
-### ix) Split and merge RGB Image
-```python
-import cv2
-img = cv2.imread('re.jpg',1)
-img = cv2.resize(img,(300,200))
-
-R = img[:,:,2]
-G = img[:,:,1]
-B = img[:,:,0]
-
-cv2.imshow('R-Channel',R)
-cv2.imshow('G-Channel',G)
-cv2.imshow('B-Channel',B)
-
-merged = cv2.merge((B,G,R))
-cv2.imshow('Merged RGB image',merged)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-```
-### Output:
-
-![Screenshot 2024-08-23 210636](https://github.com/user-attachments/assets/1f975ded-869d-41a4-8fb5-8d5541070e43)
-
-### x) Split and merge HSV Image
-```python
-import cv2
-img = cv2.imread("re.jpg",1)
-img = cv2.resize(img,(300,200))
-img=cv2.cvtColor(img,cv2.COLOR_RGB2HSV)
-
-H,S,V=cv2.split(img)
-
-cv2.imshow('Hue',H)
-cv2.imshow('Saturation',S)
-cv2.imshow('Value',V)
-
-merged = cv2.merge((H,S,V))
-cv2.imshow('Merged',merged)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-```
-### Output:
-
-![Screenshot 2024-08-23 210921](https://github.com/user-attachments/assets/b2f1fe59-f074-435e-b6ce-c2bb6c4968c1)
+![image](https://github.com/user-attachments/assets/77cfd09b-aa53-49ff-85ce-61cdb3d03c31)
 
 ## Result:
 Thus the images are read, displayed, and written ,and color conversion was performed between RGB, HSV and YCbCr color models successfully using the python program.
