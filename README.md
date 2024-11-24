@@ -100,21 +100,17 @@ cv2.destroyAllWindows()
 ```
 ![image](https://github.com/user-attachments/assets/f70ab9fd-f586-4c03-9291-217a67e1b123)
 
-3.Draw a rectangle around a specific region of interest in the image.
+3.Draw a rectangle around the full image.
 ```python
-import cv2
-image = cv2.imread("scenery.jpg")
-image = cv2.resize(image, (400, 300))
-start = (150, 100)
-stop = (300, 200)
-color = (255, 255, 100)
-thickness = 10           
-res_img = cv2.rectangle(image, start, stop, color, thickness)
-cv2.imshow('DhariniPV_212222240024', res_img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+image = cv2.imread('Mountains.jpg') 
+img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+rectangle_img = cv2.rectangle(img_rgb, (0, 0), (300, 200), (255,0,0), 10)  # cv2.rectangle(image, start_point, end_point, color, thickness)
+plt.imshow(rectangle_img, cmap='viridis')  
+plt.title("Image with Rectangle")
+plt.axis('off')  
+plt.show()
 ```
-![image](https://github.com/user-attachments/assets/97c153a7-9566-4709-b8c3-b425d4ff1f49)
+![image](https://github.com/user-attachments/assets/dcd7a8cd-7495-48d2-88f1-c289d739a33f)
 
 
 4.Add the text "OpenCV Drawing" at the top-left corner of the image.
